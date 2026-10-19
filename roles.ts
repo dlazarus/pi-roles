@@ -3,8 +3,8 @@
 /**
  * pi-roles — extensión de roles
  *
- * Carga roles desde APOLO_ROLES_DIR; si no está definida, usa ~/Apolo/RPG
- * si existe (máquina Apolo) o ~/.pi/RPG como directorio por defecto.
+ * Carga roles desde PI_ROLES_DIR; si no está definida, usa ~/.pi/roles
+ * como directorio por defecto.
  * Cada archivo .md o .txt es un rol (nombre = archivo sin extensión).
  * Frontmatter opcional al inicio del archivo:
  *
@@ -21,7 +21,7 @@
  * pura, sin identidad de coding). "agregar" lo añade al final conservando
  * herramientas y contexto de pi (úsalo si el rol necesita tools).
  *
- * Uso:  Apolo --rol Logix   |   /rol   |   /rol Dr.Qwen
+ * Uso:  pi --rol Logix   |   /rol   |   /rol Dr.Qwen
  */
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { homedir } from "node:os";
@@ -39,10 +39,8 @@ interface Rol {
 }
 
 function dirRoles(): string {
-	if (process.env.APOLO_ROLES_DIR) return process.env.APOLO_ROLES_DIR;
-	const apolo = join(homedir(), "Apolo", "RPG");
-	if (existsSync(apolo)) return apolo;
-	return join(homedir(), ".pi", "RPG");
+	if (process.env.PI_ROLES_DIR) return process.env.PI_ROLES_DIR;
+	return join(homedir(), ".pi", "roles");
 }
 
 function parseRol(nombre: string, raw: string): Rol {
@@ -162,7 +160,7 @@ export default function (pi: ExtensionAPI) {
 		// 2) Restaurar rol persistido (tras /resume)
 		const saved = ctx.sessionManager
 			.getEntries()
-			.filter((e: { type: string; customType?: string }) => e.type === "custom" && e.customType === "apolo-rol")
+			.filter((e: { type: string; customType?: string }) => e.type === "custom" && e.customType === "pi-rol")
 			.pop() as { data?: { nombre: string } } | undefined;
 		if (saved?.data?.nombre && roles[saved.data.nombre]) {
 			activo = roles[saved.data.nombre];
@@ -172,6 +170,6 @@ export default function (pi: ExtensionAPI) {
 
 	// Persistir el rol activo para que /resume lo recupere
 	pi.on("turn_start", () => {
-		if (activo) pi.appendEntry("apolo-rol", { nombre: activo.nombre });
+		if (activo) pi.appendEntry("pi-rol", { nombre: activo.nombre });
 	});
 }

@@ -25,15 +25,14 @@ Mientras un rol está activo, el footer muestra `rol: Ejemplo` en color de acent
 
 La extensión busca los roles en:
 
-1. La variable de entorno `APOLO_ROLES_DIR`, si está definida.
-2. `~/Apolo/RPG`, si existe.
-3. `~/.pi/RPG` (por defecto).
+1. La variable de entorno `PI_ROLES_DIR`, si está definida (útil para roles por proyecto).
+2. `~/.pi/roles` (por defecto).
 
 Crea el directorio y copia el ejemplo para empezar:
 
 ```bash
-mkdir -p ~/.pi/RPG
-cp examples/Ejemplo.md ~/.pi/RPG/
+mkdir -p ~/.pi/roles
+cp examples/Ejemplo.md ~/.pi/roles/
 ```
 
 El **nombre del rol es el nombre del fichero sin extensión** (`Ejemplo.md` → `/rol Ejemplo`).

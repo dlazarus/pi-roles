@@ -1,5 +1,8 @@
 # pi-roles
 
+> [!NOTE]
+> **Nota del autor:** no sé programar. Este proyecto está hecho íntegramente con *vibe coding* (lo escriben agentes de IA bajo mi dirección y yo lo pruebo). También soy novato total en GitHub: tenlo en cuenta al leer el código, y si abres un issue o un pull request y tardo en responder (o no sé qué hacer con él), no es desidia — es que literalmente estoy aprendiendo a usar GitHub. Aun así, mi intención es compartir: como amante del software libre, quiero que cualquiera pueda usarlo, clonarlo y probarlo aunque su autor sea un novato.
+
 Extensión para [pi](https://pi.dev) (`@earendil-works/pi-coding-agent`) que convierte **ficheros de texto en roles**: cada `.md` o `.txt` de un directorio define un rol con su propio system prompt y, opcionalmente, su propio modelo, proveedor, nivel de pensamiento y herramientas.
 
 Piensa en ello como "perfiles de personalidad" para tu agente: un rol para programar, otro para tutoría, otro para traducir… y cambias entre ellos con `/rol`.
